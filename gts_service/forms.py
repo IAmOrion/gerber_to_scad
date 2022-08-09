@@ -5,19 +5,22 @@ class UploadForm(forms.Form):
     outline_file = forms.FileField(label="Outline layer file")
     solderpaste_file = forms.FileField(label="Solder paste layer file")
     stencil_thickness = forms.FloatField(
-        label="Thickness (in mm) of the stencil. Make sure this is a multiple of the layer height you use for printing.",
+        label="Thickness (in mm) of the STL. Make sure this is a multiple of the layer height you use for printing.",
         initial=1.6,
     )
     include_ledge = forms.BooleanField(
+	    widget = forms.HiddenInput(),
         label="Include a ledge around half the outline of the board, to allow aligning the stencil easily.",
         initial=True,
         required=False,
     )
     ledge_height = forms.FloatField(
+	    widget = forms.HiddenInput(),
         label="Height of the stencil ledge. This should be less than the thickness of the PCB.",
         initial=0.0,
     )
     ledge_gap = forms.FloatField(
+	    widget = forms.HiddenInput(),
         label="Gap (in mm) between board and stencil ledge. Increase this if the fit of the stencil is too tight.",
         initial=0.0,
     )
@@ -26,6 +29,7 @@ class UploadForm(forms.Form):
         initial=0.0,
     )
     simplify_regions = forms.BooleanField(
+	    widget = forms.HiddenInput(),
         label="Replace regions (usually rounded rectangles) with bounding boxes. Use this if you find the processing takes extremely long, but note it might have unintended effects other than removing rounded corners.",
         initial=False,
         required=False,
