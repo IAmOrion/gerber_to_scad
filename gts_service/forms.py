@@ -6,7 +6,7 @@ class UploadForm(forms.Form):
     solderpaste_file = forms.FileField(label="Solder paste layer file")
     stencil_thickness = forms.FloatField(
         label="Thickness (in mm) of the stencil. Make sure this is a multiple of the layer height you use for printing.",
-        initial=0.2,
+        initial=1.6,
     )
     include_ledge = forms.BooleanField(
         label="Include a ledge around half the outline of the board, to allow aligning the stencil easily.",
@@ -15,7 +15,7 @@ class UploadForm(forms.Form):
     )
     ledge_height = forms.FloatField(
         label="Height of the stencil ledge. This should be less than the thickness of the PCB.",
-        initial=1.2,
+        initial=0.0,
     )
     ledge_gap = forms.FloatField(
         label="Gap (in mm) between board and stencil ledge. Increase this if the fit of the stencil is too tight.",
@@ -31,6 +31,7 @@ class UploadForm(forms.Form):
         required=False,
     )
     flip_stencil = forms.BooleanField(
+	    widget = forms.HiddenInput(),
         label="Flip the stencil (use this for bottom layer stencils)",
         initial=False,
         required=False,
